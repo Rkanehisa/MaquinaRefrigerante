@@ -1,7 +1,9 @@
 
+
 public class ControleTroco
 {
-	private static int[] trocoArray = new int[5];
+	static MySQLAccess access = new MySQLAccess();
+	private static int[] trocoArray = access.getTrocoArray();
 	private static int[] resultArray = new int[5];
 	private static float[] values = {10.00f, 5.00f, 2.00f, 1.00f, 0.50f};
 	public static Boolean CalcularTroco(float valorInserido, float preco)
@@ -30,9 +32,16 @@ public class ControleTroco
 					}
 				}
 			}
-			if(valorInserido == 0) return true; else return false;
+			if(valorInserido == 0)
+			{
+				access.setTrocoArray(trocoArray);
+				return true;
+			} else return false;
 		}
 		return false;
 	}
 	
+	public static int[] getResultArray(){
+		return resultArray;
+	}
 }
