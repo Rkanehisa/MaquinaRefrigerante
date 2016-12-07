@@ -102,5 +102,8 @@ public class MySQLAccess {
 	   public void closeResultSet(ResultSet rs) throws SQLException{
 		   rs.close();
 	   }
-
+	   
+	   public void closeConnection() throws SQLException{
+		   this.conn.close();
+	   }
 }

@@ -23,11 +23,14 @@ public class MaquinaRefrigerante {
 	   public static void main(String[] args) throws SQLException {
 		   MySQLAccess access = new MySQLAccess();
 		   access.openConnection();
-		   ResultSet rs = access.makeQuery("SELECT quantidade FROM troco");
+		   ResultSet rs = access.makeQuery("SELECT * FROM troco");
 		   while(rs.next() ){
-			   System.out.println(rs.getInt("quantidade"));
+			   double valor = rs.getDouble("valor");
+			   int quantidade = rs.getInt("quantidade");
+			   System.out.println(valor + ": " + quantidade);
 		   }
 		   access.closeResultSet(rs);
+		   access.closeConnection();
 	   }
 }
 
