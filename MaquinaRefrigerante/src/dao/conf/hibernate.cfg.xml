@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+    <properity name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</properity>
+    <properity name="hibernate.connection.password">admin</properity>
+	<properity name="hibernate.connection.url">jdbc:mysql://127.0.0.1/MaquinaRefrigerante</properity>
+	<properity name="hibernate.connection.username">admin</properity>
+	<properity name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</properity>
+
+	<mapping class="dominio.Bebidas">
+	
+    </session-factory>
+</hibernate-configuration>
