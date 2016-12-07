@@ -15,6 +15,13 @@ public class Funcionario
 	
 	private String senha;//Not the best practice.
 	
+	public Funcionario(int indice, String login, String senha)
+	{
+		this.indice = indice;
+		this.login = login;
+		this.senha = senha;
+	}
+	
 	public int GetIndice()
 	{
 		return indice;

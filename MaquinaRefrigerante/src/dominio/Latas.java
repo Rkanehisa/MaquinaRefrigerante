@@ -19,6 +19,14 @@ public class Latas
 	
 	private Date data_reposicao;
 	
+	public Latas(int indice, int id_bebida, Boolean vendido, Date data_reposicao)
+	{
+		this.indice = indice;
+		this.id_bebida = id_bebida;
+		this.vendido = vendido;
+		this.data_reposicao = data_reposicao;
+	}
+	
 	public int GetIndice()
 	{
 		return indice;

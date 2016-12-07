@@ -1,9 +1,11 @@
 package mbean;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
-import dao.TrocoDAO;
 import dominio.Troco;
+
 
 public class TrocoMBeam {
 
@@ -12,15 +14,23 @@ public class TrocoMBeam {
 	private static int[] trocoArray = new int[5];
 	private static int[] resultArray = new int[5];
 	private static float[] values = {10.00f, 5.00f, 2.00f, 1.00f, 0.50f};
-	
-	
-	public List<Troco> getListTroco() {
-		if (tabela_troco != null) {
+
+	public List<Troco> getListTroco() throws SQLException {
+		if (tabela_troco != null)
+		{
 			return tabela_troco;
 		}
-
-		TrocoDAO dao = new TrocoDAO();
-		tabela_troco = dao.getTroco();
+		
+		MySQLAccess access = new MySQLAccess();
+		access.openConnection();
+		ResultSet rs = access.makeQuery("SELECT * FROM troco");
+		while(rs.next())
+		{
+			double valor = rs.getDouble("valor");
+			int quantidade = rs.getInt("quantidade");
+			Troco troco = new Troco(valor, quantidade);
+			tabela_troco.add(troco);
+		}
 
 		return tabela_troco;
 	}
@@ -75,7 +85,7 @@ public class TrocoMBeam {
 		}
 	}
 	
-	public int[] VerificarTroco(float valorInserido, float preco)
+	public int[] VerificarTroco(float valorInserido, float preco) throws SQLException
 	{
 		float trocoTotal = 0;
 		tabela_troco = getListTroco();

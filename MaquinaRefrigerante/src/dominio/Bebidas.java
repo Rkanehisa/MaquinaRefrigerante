@@ -14,8 +14,15 @@ public class Bebidas {
 	
 	private String nome;
 	
-	private float preco;
-
+	private double preco;
+	
+	public Bebidas(int indice, String nome, double preco)
+	{
+		this.indice = indice;
+		this.nome = nome;
+		this.preco = preco;
+	}
+	
 	public int getIndice() {
 		return indice;
 	}
@@ -32,11 +39,11 @@ public class Bebidas {
 		this.nome = nome;
 	}
 
-	public float getPreco() {
+	public double getPreco() {
 		return preco;
 	}
 
-	public void setPreco(float preco) {
+	public void setPreco(double preco) {
 		this.preco = preco;
 	}
 }

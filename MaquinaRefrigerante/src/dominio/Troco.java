@@ -9,16 +9,22 @@ import javax.persistence.Id;
 public class Troco 
 {
 	@Id
-	private float valor;
+	private double valor;
 	
 	private int quantidade;
 	
-	public float GetValor()
+ 	public Troco(double valor, int quantidade)
+	{
+		this.valor = valor;
+		this.quantidade = quantidade;
+	}
+	
+	public double GetValor()
 	{
 		return valor;
 	}
 	
-	public void SetValor(float valor)
+	public void SetValor(double valor)
 	{
 		this.valor = valor;
 	}
