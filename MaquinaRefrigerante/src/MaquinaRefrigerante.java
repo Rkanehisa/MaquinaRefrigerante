@@ -1,6 +1,6 @@
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
-import dominio.Troco;
-import mbean.TrocoMBeam;
 
 /**
  * 
@@ -15,14 +15,19 @@ import mbean.TrocoMBeam;
 public class MaquinaRefrigerante {
 	/**
 	 * @param args
+	 * @throws SQLException 
 	 * @throws Exception 
 	 */
-	   public static void main(String[] args) {
-		 
-		   TrocoMBeam t = new TrocoMBeam();
-		   List<Troco> l = t.getListTroco();
-		   System.out.println(l.toString());
-		   
-		   
+	
+	
+	   public static void main(String[] args) throws SQLException {
+		   MySQLAccess access = new MySQLAccess();
+		   access.openConnection();
+		   ResultSet rs = access.makeQuery("SELECT quantidade FROM troco");
+		   while(rs.next() ){
+			   System.out.println(rs.getInt("quantidade"));
+		   }
+		   access.closeResultSet(rs);
 	   }
 }
+
