@@ -15,11 +15,12 @@ public class MySQLAccess {
 	   static final String USER = "admin";
 	   static final String PASS = "admin";
 	   
-	   //Busca os valores de troco do banco de dados
-	   public int[] getTrocoArray(){ 
-		   Connection conn = null;
-		   Statement stmt = null;
-		   int[] troco = new int[5];
+	   private Connection conn = null;
+	   private Statement stmt = null;
+	   
+	   public void openConnection(){
+		   this.conn = null;
+		   this.stmt = null;
 		   try{
 			   //STEP 2: Register JDBC driver
 			   Class.forName("com.mysql.jdbc.Driver");
@@ -27,21 +28,6 @@ public class MySQLAccess {
 			   //STEP 3: Open a connection
 			   conn = DriverManager.getConnection(this.DB_URL, this.USER, this.PASS);
 			   
-			   //STEP 4: Execute a query
-			   stmt = (Statement) conn.createStatement();
-			   String sql = "SELECT Quantidade FROM Troco";
-			   ResultSet rs = stmt.executeQuery(sql);
-			   int i = 0;
-			   while(rs.next()){
-				   //Retrieve by column name
-				   int quantidade = rs.getInt("Quantidade");
-				   
-				   troco[i] = quantidade;
-				   i += 1;
-			   }
-			   
-			   rs.close();
-	
 		   }
 		   catch(SQLException se){
 			   //Handle errors for JDBC
@@ -51,28 +37,26 @@ public class MySQLAccess {
 			   //Handle errors for Class.forName
 			   e.printStackTrace();
 		   }
-		   finally{
-			   //finally block used to close resources
-			   try{
-				   if(stmt!=null)
-					   conn.close();
-			   }
-			   catch(SQLException se){ }// do nothing
-			   try{
-				   if(conn!=null)
-					   conn.close();
-				   }
-			   catch(SQLException se){
-				   se.printStackTrace();
-				   }
-		   }
-		   return troco;
 	   }
 	   
-	   public void setTrocoArray(int[] trocoArray){ 
+	   public ResultSet makeQuery(String sql) throws SQLException{
+		   try{
+			   this.stmt = (Statement) this.conn.createStatement();
+			   ResultSet rs = stmt.executeQuery(sql);
+			   
+			   return rs;
+	   
+		   }
+		   catch (Exception e){
+			   e.printStackTrace();
+		   }
+		return null;
+	   }
+	   
+	   //Busca os valores de troco do banco de dados
+	   public ResultSet executeQuerry(){ 
 		   Connection conn = null;
 		   Statement stmt = null;
-		   
 		   try{
 			   //STEP 2: Register JDBC driver
 			   Class.forName("com.mysql.jdbc.Driver");
@@ -82,29 +66,11 @@ public class MySQLAccess {
 			   
 			   //STEP 4: Execute a query
 			   stmt = (Statement) conn.createStatement();
-			   String sql = "UPDATE Troco SET Quantidade=? WHERE Valor = ?";
-			   PreparedStatement preparedStmt = conn.prepareStatement(sql);
-			   preparedStmt.setInt(1,trocoArray[0]);
-			   preparedStmt.setFloat(2,10);
-			   preparedStmt.executeUpdate();
-
-			   preparedStmt.setInt(1,trocoArray[1]);
-			   preparedStmt.setFloat(2,5);
-			   preparedStmt.executeUpdate();
+			   String sql = "SELECT quantidade FROM troco";
+			   ResultSet rs = stmt.executeQuery(sql);
 			   
-			   preparedStmt.setInt(1,trocoArray[2]);
-			   preparedStmt.setFloat(2,2);
-			   preparedStmt.executeUpdate();
+			   return rs;
 			   
-			   preparedStmt.setInt(1,trocoArray[3]);
-			   preparedStmt.setFloat(2,1);
-			   preparedStmt.executeUpdate();
-			   
-			   preparedStmt.setInt(1,trocoArray[4]);
-			   preparedStmt.setFloat(2, (float) 0.5);
-			   preparedStmt.executeUpdate();
-
-			   conn.close();
 			   
 		   }
 		   catch(SQLException se){
@@ -130,5 +96,11 @@ public class MySQLAccess {
 				   se.printStackTrace();
 				   }
 		   }
+		return null;
 	   }
+
+	   public void closeResultSet(ResultSet rs) throws SQLException{
+		   rs.close();
+	   }
+
 }

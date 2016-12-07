@@ -1,4 +1,6 @@
-import java.util.Arrays;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  * 
@@ -13,17 +15,19 @@ import java.util.Arrays;
 public class MaquinaRefrigerante {
 	/**
 	 * @param args
+	 * @throws SQLException 
 	 * @throws Exception 
 	 */
-	   public static void main(String[] args) {
+	
+	
+	   public static void main(String[] args) throws SQLException {
 		   MySQLAccess access = new MySQLAccess();
-		   
-		   
-		   ControleTroco.CalcularTroco(10, 5);
-		   System.out.print(Arrays.toString(ControleTroco.getResultArray()));
-		   System.out.println(Arrays.toString(access.getTrocoArray()));
-		   
-		   
-		   
+		   access.openConnection();
+		   ResultSet rs = access.makeQuery("SELECT quantidade FROM troco");
+		   while(rs.next() ){
+			   System.out.println(rs.getInt("quantidade"));
+		   }
+		   access.closeResultSet(rs);
 	   }
 }
+

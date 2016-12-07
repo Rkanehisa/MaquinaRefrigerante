@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC
 		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-    <properity name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</properity>
-    <properity name="hibernate.connection.password">admin</properity>
-	<properity name="hibernate.connection.url">jdbc:mysql://127.0.0.1/MaquinaRefrigerante</properity>
-	<properity name="hibernate.connection.username">admin</properity>
-	<properity name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</properity>
-
-	<mapping class="dominio.Bebidas">
-	
+	    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+	    <property name="hibernate.connection.password">admin</property>
+		<property name="hibernate.connection.url">jdbc:mysql://127.0.0.1/MaquinaRefrigerante</property>
+		<property name="hibernate.connection.username">admin</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.format_sql">false</property>
+		
+		
+		<mapping class="dominio.Bebidas"/>
+		<mapping class="dominio.Troco"/>
+		<mapping class="dominio.Latas"/>
+		<mapping class="dominio.Funcionario"/>
     </session-factory>
 </hibernate-configuration>
