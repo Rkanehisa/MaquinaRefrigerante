@@ -10,9 +10,9 @@ public class LatasDAO extends DAO
 {
 	public List<Latas> getLatas()
 	{
-		Criteria c = getSession.createCriteria(Latas.class);
+		Criteria c = getSession().createCriteria(Latas.class);
 		
-		c.add();//Not sure how to use this.
+		//c.add();//Not sure how to use this.
 		
 		return c.list();
 	}

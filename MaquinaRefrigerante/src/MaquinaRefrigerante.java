@@ -1,4 +1,6 @@
-import java.util.Arrays;
+import java.util.List;
+import dominio.Troco;
+import mbean.TrocoMBeam;
 
 /**
  * 
@@ -16,13 +18,10 @@ public class MaquinaRefrigerante {
 	 * @throws Exception 
 	 */
 	   public static void main(String[] args) {
-		   MySQLAccess access = new MySQLAccess();
-		   
-		   
-		   ControleTroco.CalcularTroco(10, 5);
-		   System.out.print(Arrays.toString(ControleTroco.getResultArray()));
-		   System.out.println(Arrays.toString(access.getTrocoArray()));
-		   
+		 
+		   TrocoMBeam t = new TrocoMBeam();
+		   List<Troco> l = t.getListTroco();
+		   System.out.println(l.toString());
 		   
 		   
 	   }

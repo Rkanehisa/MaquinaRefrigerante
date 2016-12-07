@@ -12,7 +12,8 @@ public class TrocoDAO extends DAO
 	{
 		Criteria c = getSession().createCriteria(Troco.class);
 		
-		c.add();//Still have no idea how to use this.
+		
+		//c.add();//Still have no idea how to use this.
 		
 		return c.list();
 	}

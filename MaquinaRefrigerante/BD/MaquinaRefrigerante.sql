@@ -80,11 +80,11 @@ CREATE TABLE `troco` (
 --
 
 INSERT INTO `troco` (`valor`, `quantidade`) VALUES
-(0.5, 5),
-(1, 5),
-(2, 5),
+(10, 5),
 (5, 4),
-(10, 5);
+(2, 5),
+(1, 5),
+(0.5, 5);
 
 --
 -- Indexes for dumped tables

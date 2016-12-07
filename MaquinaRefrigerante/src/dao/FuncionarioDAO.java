@@ -12,7 +12,7 @@ public class FuncionarioDAO extends DAO
 	{
 		Criteria c = getSession().createCriteria(Funcionario.class);
 		
-		c.add();//Still have no idea how to use this.
+		//c.add();//Still have no idea how to use this.
 		
 		return c.list();
 	}
