@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2
+-- version 4.5.2
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 07, 2016 at 02:46 PM
--- Server version: 5.7.16-0ubuntu0.16.04.1
--- PHP Version: 7.0.8-0ubuntu0.16.04.3
+-- Generation Time: 07-Dez-2016 às 22:44
+-- Versão do servidor: 10.1.13-MariaDB
+-- PHP Version: 5.5.35
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bebidas`
+-- Estrutura da tabela `bebidas`
 --
 
 CREATE TABLE `bebidas` (
@@ -33,16 +33,21 @@ CREATE TABLE `bebidas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `bebidas`
+-- Extraindo dados da tabela `bebidas`
 --
 
 INSERT INTO `bebidas` (`indice`, `nome`, `preco`) VALUES
-(1, 'Coca', 4);
+(1, 'Coca Cola', 8.5),
+(2, 'Pepsi', 3.5),
+(3, 'Mtn. Dew', 4),
+(4, 'Soylent Green', 6.5),
+(5, 'Crystal Pepsi', 7.5),
+(6, 'Dr. Pepper', 5);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `funcionario`
+-- Estrutura da tabela `funcionario`
 --
 
 CREATE TABLE `funcionario` (
@@ -54,7 +59,7 @@ CREATE TABLE `funcionario` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `latas`
+-- Estrutura da tabela `latas`
 --
 
 CREATE TABLE `latas` (
@@ -64,10 +69,17 @@ CREATE TABLE `latas` (
   `vendido` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `latas`
+--
+
+INSERT INTO `latas` (`indice`, `id_bebida`, `data_reposicao`, `vendido`) VALUES
+(1, 1, '2016-08-03 00:00:00', 0);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `troco`
+-- Estrutura da tabela `troco`
 --
 
 CREATE TABLE `troco` (
@@ -76,12 +88,12 @@ CREATE TABLE `troco` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `troco`
+-- Extraindo dados da tabela `troco`
 --
 
 INSERT INTO `troco` (`valor`, `quantidade`) VALUES
-(10, 5),
-(5, 4),
+(10, 5);
+(5, 5),
 (2, 5),
 (1, 5),
 (0.5, 5);
@@ -120,7 +132,7 @@ ALTER TABLE `troco`
 --
 
 --
--- Constraints for table `latas`
+-- Limitadores para a tabela `latas`
 --
 ALTER TABLE `latas`
   ADD CONSTRAINT `latas_ibfk_1` FOREIGN KEY (`id_bebida`) REFERENCES `bebidas` (`indice`);

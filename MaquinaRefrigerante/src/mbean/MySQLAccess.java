@@ -1,3 +1,4 @@
+package mbean;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -102,5 +103,8 @@ public class MySQLAccess {
 	   public void closeResultSet(ResultSet rs) throws SQLException{
 		   rs.close();
 	   }
-
+	   
+	   public void closeConnection() throws SQLException{
+		   this.conn.close();
+	   }
 }
