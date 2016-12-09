@@ -49,7 +49,7 @@ public class LoginInterface {
 		text_Username = new JTextField();
 		text_Username.setToolTipText("Username");
 		text_Username.setHorizontalAlignment(SwingConstants.CENTER);
-		text_Username.setBounds(10, 11, 164, 35);
+		text_Username.setBounds(10, 21, 164, 35);
 		frame.getContentPane().add(text_Username);
 		text_Username.setColumns(10);
 		
