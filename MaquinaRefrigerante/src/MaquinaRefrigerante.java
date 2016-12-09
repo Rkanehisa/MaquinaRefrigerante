@@ -5,7 +5,6 @@ import java.util.List;
 
 import dominio.Latas;
 import mbean.*;
-
 /**
  * 
  */
@@ -25,14 +24,7 @@ public class MaquinaRefrigerante {
 	
 	
 	   public static void main(String[] args) throws SQLException {
-		   java.util.Date dt = new java.util.Date();
-
-		   java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-		   Latas l = new Latas(0,1,false,dt);
-		   System.out.println(sdf.format(l.GetDataReposicao()));
-		   LatasMBeam.addLatas(l);
-		   
+		   funcTools.createLog();
 	   }
 }
 
