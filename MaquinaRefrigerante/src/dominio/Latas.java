@@ -27,6 +27,7 @@ public class Latas
 		this.data_reposicao = data_reposicao;
 	}
 	
+
 	public int GetIndice()
 	{
 		return indice;
