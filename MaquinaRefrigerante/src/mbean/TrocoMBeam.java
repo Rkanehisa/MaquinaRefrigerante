@@ -16,7 +16,7 @@ public class TrocoMBeam {
 	private static int[] resultArray = new int[5];
 	private static float[] values = {10.00f, 5.00f, 2.00f, 1.00f, 0.50f};
 
-	public List<Troco> getListTroco() throws SQLException {
+	public static List<Troco> getListTroco() throws SQLException {
 		if (!tabela_troco.isEmpty())
 		{
 			return tabela_troco;
@@ -36,7 +36,7 @@ public class TrocoMBeam {
 		return tabela_troco;
 	}
 	
-	private void InitTrocoArray()
+	private static void InitTrocoArray()
 	{
 		for(int i = 0; i < 5; i++)
 		{
@@ -44,7 +44,7 @@ public class TrocoMBeam {
 		}
 	}
 	
-	public static Boolean CalcularTroco(float valorInserido, float preco)
+	private static Boolean CalcularTroco(float valorInserido, float preco)
 	{
 		float trocoTotal = 0;
 		for(int i = 0; i < 5; i++)
@@ -78,15 +78,25 @@ public class TrocoMBeam {
 		return false;
 	}
 	
-	private void UpdateTrocoList()
+	private static void UpdateTrocoList() throws SQLException
 	{
 		for(int i = 0; i < 5; i++)
 		{
 			tabela_troco.get(i).SetQuantidade(tabela_troco.get(i).GetQuantidade() - resultArray[i]);
 		}
+		MySQLAccess access = new MySQLAccess();
+		access.openConnection();
+		for(int i = 0; i < tabela_troco.size(); i++)
+		{
+			String sql = String.format("UPDATE troco SET quantidade = %d WHERE valor = ", tabela_troco.get(i).GetQuantidade());
+			access.UpdateDB(sql + tabela_troco.get(i).GetValor());
+
+		}
+		access.closeConnection();
+
 	}
 	
-	public int[] VerificarTroco(float valorInserido, float preco) throws SQLException
+	public static int[] VerificarTroco(float valorInserido, float preco) throws SQLException
 	{
 		float trocoTotal = 0;
 		tabela_troco = getListTroco();
