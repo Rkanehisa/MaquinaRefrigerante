@@ -136,7 +136,7 @@ public class MaquinaInterface {
 					label_Bebida.setText("");
 				}
 				catch(NumberFormatException err){
-					// Not an Integer
+					// Not an Integer;
 				}
 			}
 		});

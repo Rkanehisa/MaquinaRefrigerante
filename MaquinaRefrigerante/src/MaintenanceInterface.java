@@ -114,7 +114,7 @@ public class MaintenanceInterface extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try{
 					Integer.parseInt(textField_3.getText());
-					// Inserir no BD normalmente
+					// Inserir no BD normalmente;
 					textField_3.setText("");
 				}
 				catch(NumberFormatException err){
