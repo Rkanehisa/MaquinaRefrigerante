@@ -68,7 +68,7 @@ public class MaquinaInterface {
 		btn_Pepsi.setBounds(124, 131, 100, 23);
 		frmMaquinaInterface.getContentPane().add(btn_Pepsi);
 		
-		JButton btn_MtnDew = new JButton("Mtn Dew");
+		JButton btn_MtnDew = new JButton("Mtn. Dew");
 		btn_MtnDew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				label_Bebida.setText(btn_MtnDew.getText());
@@ -114,12 +114,14 @@ public class MaquinaInterface {
 		textField.setColumns(10);
 		
 		JTextArea txtrBebida = new JTextArea();
+		txtrBebida.setEditable(false);
 		txtrBebida.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		txtrBebida.setText("Bebida:");
 		txtrBebida.setBounds(10, 11, 94, 22);
 		frmMaquinaInterface.getContentPane().add(txtrBebida);
 		
 		JTextArea txtrValor = new JTextArea();
+		txtrValor.setEditable(false);
 		txtrValor.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		txtrValor.setText("Pre\u00E7o (R$):");
 		txtrValor.setBounds(10, 44, 94, 22);
@@ -135,19 +137,20 @@ public class MaquinaInterface {
 		frmMaquinaInterface.getContentPane().add(btnOk);
 		
 		JTextArea txtrValorIns = new JTextArea();
+		txtrValorIns.setEditable(false);
 		txtrValorIns.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		txtrValorIns.setText("Pago  (R$):");
 		txtrValorIns.setBounds(10, 77, 94, 22);
 		frmMaquinaInterface.getContentPane().add(txtrValorIns);
 
 		label_Bebida.setBackground(Color.WHITE);
-		label_Bebida.setForeground(Color.WHITE);
+		label_Bebida.setForeground(Color.BLACK);
 		label_Bebida.setBounds(114, 13, 110, 20);
 		frmMaquinaInterface.getContentPane().add(label_Bebida);
 		
 		JLabel label_Preco = new JLabel("");
 		label_Preco.setBackground(Color.WHITE);
-		label_Preco.setForeground(Color.WHITE);
+		label_Preco.setForeground(Color.BLACK);
 		label_Preco.setBounds(114, 44, 110, 23);
 		frmMaquinaInterface.getContentPane().add(label_Preco);
 	}
