@@ -78,10 +78,11 @@ public class TrocoMBeam {
 		return false;
 	}
 	
-	private static void UpdateTrocoList() throws SQLException
+	private static void UpdateTrocoList(int[] resultArray) throws SQLException
 	{
 		for(int i = 0; i < 5; i++)
 		{
+			//Lembra de colocar valores negativos no vetor de adicionar troco HUEAHRJOASHFJAKSHFBJAKSLHG
 			tabela_troco.get(i).SetQuantidade(tabela_troco.get(i).GetQuantidade() - resultArray[i]);
 		}
 		MySQLAccess access = new MySQLAccess();
@@ -114,7 +115,7 @@ public class TrocoMBeam {
 			}
 			if(trocoTotal == (valorInserido - preco))
 			{
-				UpdateTrocoList();
+				UpdateTrocoList(resultArray);
 				return resultArray;
 			}
 			else return null;
