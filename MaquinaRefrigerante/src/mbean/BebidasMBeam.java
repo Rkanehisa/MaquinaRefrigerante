@@ -2,6 +2,7 @@ package mbean;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 
 import dao.BebidasDAO;
@@ -10,10 +11,10 @@ import dominio.Troco;
 
 public class BebidasMBeam {
 
-	private List<Bebidas> bebidas = null;
+	private List<Bebidas> bebidas = new LinkedList<Bebidas>();
 
 	public List<Bebidas> getListBebidas() throws SQLException {
-		if (bebidas != null) {
+		if (!bebidas.isEmpty()) {
 			return bebidas;
 		}
 		MySQLAccess access = new MySQLAccess();

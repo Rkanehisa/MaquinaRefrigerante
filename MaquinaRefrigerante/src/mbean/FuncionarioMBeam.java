@@ -2,6 +2,7 @@ package mbean;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 
 import dao.FuncionarioDAO;
@@ -10,10 +11,10 @@ import dominio.Funcionario;
 
 public class FuncionarioMBeam {
 
-	private List<Funcionario> funcionarios = null;
+	private List<Funcionario> funcionarios = new LinkedList<Funcionario>();
 
 	public List<Funcionario> getListFuncionarios() throws SQLException {
-		if (funcionarios != null) {
+		if (!funcionarios.isEmpty()) {
 			return funcionarios;
 		}
 		MySQLAccess access = new MySQLAccess();
