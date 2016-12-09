@@ -10,12 +10,13 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JRadioButton;
 import java.awt.Font;
+import java.awt.Color;
 
 public class MaquinaInterface {
 
 	private JFrame frmMaquinaInterface;
 	private JTextField textField;
-
+	JLabel label_Bebida = new JLabel("");
 	/**
 	 * Launch the application.
 	 */
@@ -49,53 +50,59 @@ public class MaquinaInterface {
 		frmMaquinaInterface.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmMaquinaInterface.getContentPane().setLayout(null);
 		
-		JButton btnNewButton = new JButton("Coca Cola");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btn_CocaCola = new JButton("Coca Cola");
+		btn_CocaCola.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				label_Bebida.setText(btn_CocaCola.getText());
 			}
 		});
-		btnNewButton.setBounds(10, 131, 100, 23);
-		frmMaquinaInterface.getContentPane().add(btnNewButton);
+		btn_CocaCola.setBounds(10, 131, 100, 23);
+		frmMaquinaInterface.getContentPane().add(btn_CocaCola);
 		
-		JButton btnNewButton_1 = new JButton("Pepsi");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btn_Pepsi = new JButton("Pepsi");
+		btn_Pepsi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				label_Bebida.setText(btn_Pepsi.getText());
 			}
 		});
-		btnNewButton_1.setBounds(124, 131, 100, 23);
-		frmMaquinaInterface.getContentPane().add(btnNewButton_1);
+		btn_Pepsi.setBounds(124, 131, 100, 23);
+		frmMaquinaInterface.getContentPane().add(btn_Pepsi);
 		
-		JButton btnNewButton_2 = new JButton("Mtn Dew");
-		btnNewButton_2.addActionListener(new ActionListener() {
+		JButton btn_MtnDew = new JButton("Mtn Dew");
+		btn_MtnDew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				label_Bebida.setText(btn_MtnDew.getText());
 			}
 		});
-		btnNewButton_2.setBounds(10, 165, 100, 23);
-		frmMaquinaInterface.getContentPane().add(btnNewButton_2);
+		btn_MtnDew.setBounds(10, 165, 100, 23);
+		frmMaquinaInterface.getContentPane().add(btn_MtnDew);
 		
-		JButton btnNewButton_3 = new JButton("Soylent Green");
-		btnNewButton_3.addActionListener(new ActionListener() {
+		JButton btn_SoylentGreen = new JButton("Soylent Green");
+		btn_SoylentGreen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				label_Bebida.setText(btn_SoylentGreen.getText());
 			}
 		});
-		btnNewButton_3.setBounds(124, 165, 100, 23);
-		frmMaquinaInterface.getContentPane().add(btnNewButton_3);
+		btn_SoylentGreen.setBounds(124, 165, 100, 23);
+		frmMaquinaInterface.getContentPane().add(btn_SoylentGreen);
 		
-		JButton btnNewButton_4 = new JButton("Crystal Pepsi");
-		btnNewButton_4.addActionListener(new ActionListener() {
+		JButton btn_CrystalPepsi = new JButton("Crystal Pepsi");
+		btn_CrystalPepsi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				label_Bebida.setText(btn_CrystalPepsi.getText());
 			}
 		});
-		btnNewButton_4.setBounds(10, 199, 100, 23);
-		frmMaquinaInterface.getContentPane().add(btnNewButton_4);
+		btn_CrystalPepsi.setBounds(10, 199, 100, 23);
+		frmMaquinaInterface.getContentPane().add(btn_CrystalPepsi);
 		
-		JButton btnNewButton_5 = new JButton("Dr. Pepper");
-		btnNewButton_5.addActionListener(new ActionListener() {
+		JButton btn_DrPepper = new JButton("Dr. Pepper");
+		btn_DrPepper.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				label_Bebida.setText(btn_DrPepper.getText());
 			}
 		});
-		btnNewButton_5.setBounds(124, 199, 100, 23);
-		frmMaquinaInterface.getContentPane().add(btnNewButton_5);
+		btn_DrPepper.setBounds(124, 199, 100, 23);
+		frmMaquinaInterface.getContentPane().add(btn_DrPepper);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(10, 112, 214, 8);
@@ -119,6 +126,11 @@ public class MaquinaInterface {
 		frmMaquinaInterface.getContentPane().add(txtrValor);
 		
 		JButton btnOk = new JButton("OK");
+		btnOk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				label_Bebida.setText("");
+			}
+		});
 		btnOk.setBounds(174, 78, 50, 23);
 		frmMaquinaInterface.getContentPane().add(btnOk);
 		
@@ -127,13 +139,16 @@ public class MaquinaInterface {
 		txtrValorIns.setText("Pago  (R$):");
 		txtrValorIns.setBounds(10, 77, 94, 22);
 		frmMaquinaInterface.getContentPane().add(txtrValorIns);
+
+		label_Bebida.setBackground(Color.WHITE);
+		label_Bebida.setForeground(Color.WHITE);
+		label_Bebida.setBounds(114, 13, 110, 20);
+		frmMaquinaInterface.getContentPane().add(label_Bebida);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(114, 11, 110, 22);
-		frmMaquinaInterface.getContentPane().add(textArea);
-		
-		JTextArea textArea_1 = new JTextArea();
-		textArea_1.setBounds(114, 44, 110, 22);
-		frmMaquinaInterface.getContentPane().add(textArea_1);
+		JLabel label_Preco = new JLabel("");
+		label_Preco.setBackground(Color.WHITE);
+		label_Preco.setForeground(Color.WHITE);
+		label_Preco.setBounds(114, 44, 110, 23);
+		frmMaquinaInterface.getContentPane().add(label_Preco);
 	}
 }
