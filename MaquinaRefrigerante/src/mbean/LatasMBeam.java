@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.mysql.jdbc.Statement;
+
 import dao.LatasDAO;
 import dominio.Latas;
 import dominio.Troco;
@@ -12,14 +14,15 @@ import java.util.Date;
 import java.util.LinkedList;
 
 public class LatasMBeam {
-
+	private static MySQLAccess access = new MySQLAccess();
+	
 	private static List<Latas> latas = new LinkedList<Latas>();
 
 	public static List<Latas> getListLatas() throws SQLException {
 		if (!latas.isEmpty()) {
 			return latas;
 		}
-		MySQLAccess access = new MySQLAccess();
+		
 		access.openConnection();
 		ResultSet rs = access.makeQuery("SELECT * FROM latas");
 		while(rs.next())
@@ -72,5 +75,26 @@ public class LatasMBeam {
 		}
 		return filtered_latas;
 	}
-
+	
+	public static void setSoldLata(int indice) throws SQLException{
+		access.openConnection();
+		access.UpdateDB("UPDATE latas SET vendido=1 WHERE indice="+String.valueOf(indice));
+		access.closeConnection();
+	}
+	
+	public static void addLatas(Latas l) throws SQLException{
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String currentTime = sdf.format(l.GetDataReposicao());
+		String sql = String.format("INSERT INTO latas VALUES (%d,%d,'%s',0);",l.GetIndice(),l.GetIdBebida(),currentTime);
+		
+		access.openConnection();
+		access.UpdateDB(sql);
+		access.closeConnection();
+	}
+	
+	public static void RemoveSoldLatas() throws SQLException{
+		access.openConnection();
+		access.UpdateDB("DELETE FROM latas WHERE vendido=1");
+		access.closeConnection();
+	}
 }

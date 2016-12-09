@@ -40,62 +40,27 @@ public class MySQLAccess {
 		   }
 	   }
 	   
+	   public void UpdateDB(String sql) throws SQLException{
+		   try{
+			   stmt = this.conn.createStatement();
+			   stmt.executeUpdate(sql);
+			   stmt.close();
+		   }
+		   catch (Exception e){
+			   e.printStackTrace();
+		   }
+	   }
+	   
 	   public ResultSet makeQuery(String sql) throws SQLException{
 		   try{
 			   this.stmt = (Statement) this.conn.createStatement();
 			   ResultSet rs = stmt.executeQuery(sql);
-			   
+		
 			   return rs;
 	   
 		   }
 		   catch (Exception e){
 			   e.printStackTrace();
-		   }
-		return null;
-	   }
-	   
-	   //Busca os valores de troco do banco de dados
-	   public ResultSet executeQuerry(){ 
-		   Connection conn = null;
-		   Statement stmt = null;
-		   try{
-			   //STEP 2: Register JDBC driver
-			   Class.forName("com.mysql.jdbc.Driver");
-			      
-			   //STEP 3: Open a connection
-			   conn = DriverManager.getConnection(this.DB_URL, this.USER, this.PASS);
-			   
-			   //STEP 4: Execute a query
-			   stmt = (Statement) conn.createStatement();
-			   String sql = "SELECT quantidade FROM troco";
-			   ResultSet rs = stmt.executeQuery(sql);
-			   
-			   return rs;
-			   
-			   
-		   }
-		   catch(SQLException se){
-			   //Handle errors for JDBC
-			   se.printStackTrace();
-		   }
-		   catch(Exception e){
-			   //Handle errors for Class.forName
-			   e.printStackTrace();
-		   }
-		   finally{
-			   //finally block used to close resources
-			   try{
-				   if(stmt!=null)
-					   conn.close();
-			   }
-			   catch(SQLException se){ }// do nothing
-			   try{
-				   if(conn!=null)
-					   conn.close();
-				   }
-			   catch(SQLException se){
-				   se.printStackTrace();
-				   }
 		   }
 		return null;
 	   }
