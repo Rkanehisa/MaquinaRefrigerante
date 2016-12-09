@@ -97,4 +97,58 @@ public class LatasMBeam {
 		access.UpdateDB("DELETE FROM latas WHERE vendido=1");
 		access.closeConnection();
 	}
+	
+	public static int getMaxIndex() throws SQLException{
+		MySQLAccess access = new MySQLAccess();
+		access.openConnection();
+		ResultSet rs = access.makeQuery("SELECT MAX(indice) FROM latas");
+		if(rs.next()){
+			int indice = rs.getInt("MAX(indice)");
+			rs.close();
+			access.closeConnection();
+			return indice;
+		}
+		rs.close();
+		access.closeConnection();
+		return -1;
+	}
+	
+	public static double sellLata(String bebida,double valorRecebido) throws SQLException{
+		Date agora = new Date();
+		MySQLAccess access = new MySQLAccess();
+		access.openConnection();
+		ResultSet rs;
+		
+		int indexBebida = BebidasMBeam.getBebidaIndex(bebida);
+		if(valorRecebido >= BebidasMBeam.getBebidaPreco(bebida)){
+			java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String currentTime = sdf.format(agora);
+			
+			
+			String sql = String.format("SELECT * FROM latas WHERE id_bebida = %d AND (data_reposicao + INTERVAL 30 MINUTE) <= '%s' AND vendido = 0;",indexBebida,currentTime);
+			rs = access.makeQuery(sql);
+			if(rs.next()){
+				int indice = rs.getInt("indice");
+				setSoldLata(indice);
+				rs.close();
+				
+				rs = access.makeQuery(String.format("SELECT preco FROM bebidas WHERE indice=%d",indexBebida));
+				rs.next();
+				double troco = valorRecebido - rs.getDouble("preco");
+				rs.close();
+				access.closeConnection();
+				return troco;
+			}
+			else{
+				System.out.println(String.format("Não há latas de %s disponíveis para a venda",bebida));
+				return 0;
+			}
+		}
+		else{
+			System.out.println(String.format("Valor insuficiente para a compra",bebida));
+			return 0;
+			
+		}
+		
+	}
 }

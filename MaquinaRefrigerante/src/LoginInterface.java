@@ -5,8 +5,10 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+import mbean.FuncionarioMBeam;
 
 public class LoginInterface {
 
@@ -57,13 +59,19 @@ public class LoginInterface {
 		JButton btn_Access = new JButton("OK");
 		btn_Access.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(text_Username.getText().equals("a") && pass_Password.getText().equals("a")){
-					System.out.println("Enter");
-					frmLogin.dispose();
-					MaintenanceInterface newInterface = new MaintenanceInterface();
-					newInterface.setVisible(true);
-				}else{
-					System.out.println("Nah");
+				try {
+					if(FuncionarioMBeam.getListFuncionarios(text_Username.getText(),pass_Password.getText())) {
+						
+						System.out.println("Enter");
+						frmLogin.dispose();
+						MaintenanceInterface newInterface = new MaintenanceInterface();
+						newInterface.setVisible(true);
+					}else{
+						System.out.println("Nah");
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 		});

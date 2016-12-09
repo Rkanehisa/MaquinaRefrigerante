@@ -17,15 +17,18 @@ public class FuncionarioMBeam {
 		MySQLAccess access = new MySQLAccess();
 		access.openConnection();
 		ResultSet rs = access.makeQuery("SELECT * FROM funcionario WHERE login='" + login + "' AND senha='" + senha + "';");
-		access.closeConnection();
+		
 		if(rs.next())
 		{
 			rs.close();
+			access.closeConnection();
 			return true;
 		}
-		rs.close();
-		return false;
-
+		else{
+			rs.close();
+			access.closeConnection();
+			return false;
+		}
 	}
 	
 

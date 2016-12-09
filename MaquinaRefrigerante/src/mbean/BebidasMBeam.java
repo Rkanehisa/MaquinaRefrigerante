@@ -28,8 +28,37 @@ public class BebidasMBeam {
 			Bebidas bebida = new Bebidas(indice, nome, preco);
 			bebidas.add(bebida);
 		}
-
+		rs.close();
+		access.closeConnection();
 		return bebidas;
 	}
 
+	public static int getBebidaIndex(String name) throws SQLException{
+		MySQLAccess access = new MySQLAccess();
+		access.openConnection();
+		String sql = String.format("SELECT indice FROM bebidas WHERE nome = '%s' ",name);
+		ResultSet rs = access.makeQuery(sql);
+		if(rs.next()){
+			return rs.getInt("indice");
+		}
+		else{
+			return -1;
+		}
+		
+	}
+	
+	public static double getBebidaPreco(String name) throws SQLException{
+		MySQLAccess access = new MySQLAccess();
+		access.openConnection();
+		String sql = String.format("SELECT preco FROM bebidas WHERE nome = '%s' ",name);
+		ResultSet rs = access.makeQuery(sql);
+		if(rs.next()){
+			return rs.getDouble("preco");
+		}
+		else{
+			return -1;
+		}
+		
+	}
+	
 }

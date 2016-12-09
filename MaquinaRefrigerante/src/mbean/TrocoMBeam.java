@@ -82,7 +82,6 @@ public class TrocoMBeam {
 	{
 		for(int i = 0; i < 5; i++)
 		{
-			//Lembra de colocar valores negativos no vetor de adicionar troco HUEAHRJOASHFJAKSHFBJAKSLHG
 			tabela_troco.get(i).SetQuantidade(tabela_troco.get(i).GetQuantidade() - resultArray[i]);
 		}
 		MySQLAccess access = new MySQLAccess();
@@ -95,6 +94,16 @@ public class TrocoMBeam {
 		}
 		access.closeConnection();
 
+	}
+	
+	public static void addTroco(int quantidade,double valor) throws SQLException{
+		MySQLAccess access = new MySQLAccess();
+		access.openConnection();
+		ResultSet rs = access.makeQuery("SELECT quantidade FROM troco WHERE valor = " + String.valueOf(valor));
+		rs.next();
+		int q = quantidade + rs.getInt("quantidade");
+		access.UpdateDB(String.format("UPDATE troco SET quantidade = %d WHERE valor = ",q) + String.valueOf(valor));
+		access.closeConnection();
 	}
 	
 	public static int[] VerificarTroco(float valorInserido, float preco) throws SQLException

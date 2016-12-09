@@ -3,9 +3,15 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
+
+import mbean.BebidasMBeam;
+import mbean.LatasMBeam;
+import mbean.TrocoMBeam;
+
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JRadioButton;
@@ -16,7 +22,8 @@ public class MaquinaInterface {
 
 	private JFrame frmMaquinaInterface;
 	private JTextField textField;
-	JLabel label_Bebida = new JLabel("");
+	private JLabel label_Bebida = new JLabel("");
+	private JLabel label_Preco = new JLabel("");
 	/**
 	 * Launch the application.
 	 */
@@ -53,7 +60,16 @@ public class MaquinaInterface {
 		JButton btn_CocaCola = new JButton("Coca Cola");
 		btn_CocaCola.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 				label_Bebida.setText(btn_CocaCola.getText());
+				
+				try {
+					label_Preco.setText("R$ "+ String.valueOf(BebidasMBeam.getBebidaPreco(btn_CocaCola.getText())));
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 		});
 		btn_CocaCola.setBounds(10, 131, 100, 23);
@@ -63,6 +79,13 @@ public class MaquinaInterface {
 		btn_Pepsi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				label_Bebida.setText(btn_Pepsi.getText());
+				try {
+					label_Preco.setText("R$ "+ String.valueOf(BebidasMBeam.getBebidaPreco(btn_Pepsi.getText())));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		btn_Pepsi.setBounds(124, 131, 100, 23);
@@ -72,6 +95,13 @@ public class MaquinaInterface {
 		btn_MtnDew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				label_Bebida.setText(btn_MtnDew.getText());
+				try {
+					label_Preco.setText("R$ "+ String.valueOf(BebidasMBeam.getBebidaPreco(btn_MtnDew.getText())));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		btn_MtnDew.setBounds(10, 165, 100, 23);
@@ -81,6 +111,13 @@ public class MaquinaInterface {
 		btn_SoylentGreen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				label_Bebida.setText(btn_SoylentGreen.getText());
+				try {
+					label_Preco.setText("R$ "+ String.valueOf(BebidasMBeam.getBebidaPreco(btn_SoylentGreen.getText())));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		btn_SoylentGreen.setBounds(124, 165, 100, 23);
@@ -90,6 +127,12 @@ public class MaquinaInterface {
 		btn_CrystalPepsi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				label_Bebida.setText(btn_CrystalPepsi.getText());
+				try {
+					label_Preco.setText("R$ "+ String.valueOf(BebidasMBeam.getBebidaPreco(btn_CrystalPepsi.getText())));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btn_CrystalPepsi.setBounds(10, 199, 100, 23);
@@ -99,6 +142,12 @@ public class MaquinaInterface {
 		btn_DrPepper.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				label_Bebida.setText(btn_DrPepper.getText());
+				try {
+					label_Preco.setText("R$ "+ String.valueOf(BebidasMBeam.getBebidaPreco(btn_DrPepper.getText())));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btn_DrPepper.setBounds(124, 199, 100, 23);
@@ -131,12 +180,22 @@ public class MaquinaInterface {
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try{
-					Float.parseFloat(label_Bebida.getText());
+					Float valor = Float.parseFloat(textField.getText());
 					// Realizar Compra, calcular troco and so on
-					label_Bebida.setText("");
+					Double troco = LatasMBeam.sellLata(label_Bebida.getText(),valor);
+					
+					//Adicionar função que atualiza troco
+					
+					label_Preco.setText("Troco: R$"+String.valueOf(troco));
+					label_Bebida.setText("Vendido");
+					
 				}
 				catch(NumberFormatException err){
 					// Not an Integer;
+
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 		});
@@ -155,7 +214,7 @@ public class MaquinaInterface {
 		label_Bebida.setBounds(114, 13, 110, 20);
 		frmMaquinaInterface.getContentPane().add(label_Bebida);
 		
-		JLabel label_Preco = new JLabel("");
+		
 		label_Preco.setBackground(Color.WHITE);
 		label_Preco.setForeground(Color.BLACK);
 		label_Preco.setBounds(114, 44, 110, 23);
