@@ -109,7 +109,7 @@ public class MaquinaInterface {
 		frmMaquinaInterface.getContentPane().add(separator);
 		
 		textField = new JTextField();
-		textField.setBounds(114, 78, 50, 23);
+		textField.setBounds(114, 78, 40, 23);
 		frmMaquinaInterface.getContentPane().add(textField);
 		textField.setColumns(10);
 		
@@ -130,10 +130,17 @@ public class MaquinaInterface {
 		JButton btnOk = new JButton("OK");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				label_Bebida.setText("");
+				try{
+					Float.parseFloat(label_Bebida.getText());
+					// Realizar Compra, calcular troco and so on
+					label_Bebida.setText("");
+				}
+				catch(NumberFormatException err){
+					// Not an Integer
+				}
 			}
 		});
-		btnOk.setBounds(174, 78, 50, 23);
+		btnOk.setBounds(164, 78, 60, 23);
 		frmMaquinaInterface.getContentPane().add(btnOk);
 		
 		JTextArea txtrValorIns = new JTextArea();
