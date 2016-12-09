@@ -9,13 +9,14 @@ import dominio.Latas;
 import dominio.Troco;
 
 import java.util.Date;
+import java.util.LinkedList;
 
 public class LatasMBeam {
 
-	private List<Latas> latas = null;
+	private List<Latas> latas = new LinkedList<Latas>();
 
 	public List<Latas> getListLatas() throws SQLException {
-		if (latas != null) {
+		if (!latas.isEmpty()) {
 			return latas;
 		}
 		MySQLAccess access = new MySQLAccess();

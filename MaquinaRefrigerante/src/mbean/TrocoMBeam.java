@@ -2,6 +2,7 @@ package mbean;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 
 import dominio.Troco;
@@ -9,14 +10,14 @@ import dominio.Troco;
 
 public class TrocoMBeam {
 
-	private static List<Troco> tabela_troco = null;
+	private static List<Troco> tabela_troco = new LinkedList<Troco>();
 	
 	private static int[] trocoArray = new int[5];
 	private static int[] resultArray = new int[5];
 	private static float[] values = {10.00f, 5.00f, 2.00f, 1.00f, 0.50f};
 
 	public List<Troco> getListTroco() throws SQLException {
-		if (tabela_troco != null)
+		if (!tabela_troco.isEmpty())
 		{
 			return tabela_troco;
 		}
