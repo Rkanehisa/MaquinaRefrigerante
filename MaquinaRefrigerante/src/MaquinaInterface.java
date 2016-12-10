@@ -182,12 +182,30 @@ public class MaquinaInterface {
 				try{
 					Float valor = Float.parseFloat(textField.getText());
 					// Realizar Compra, calcular troco and so on
-					Double troco = LatasMBeam.sellLata(label_Bebida.getText(),valor);
+					int[] troco = LatasMBeam.sellLata(label_Bebida.getText(), valor);					
+
+					if(troco[0] == -1)
+					{
+						label_Preco.setText("But I refuse");
+						label_Bebida.setText("Dinheiro Insuficiente");
+					} 
+					if(troco[0] == -2)
+					{
+						label_Preco.setText("Dinheiro retornado");
+						label_Bebida.setText("Indisponivel");
+					}
+					if(troco[0] == -3)
+					{
+						label_Preco.setText("Impossivel ");
+						label_Bebida.setText("montar troco");
+					} else
+					{
+						label_Preco.setText("Troco: R$"+String.valueOf(troco));
+						label_Bebida.setText("Vendido");
+					}
+
 					
-					//Adicionar função que atualiza troco
 					
-					label_Preco.setText("Troco: R$"+String.valueOf(troco));
-					label_Bebida.setText("Vendido");
 					
 				}
 				catch(NumberFormatException err){

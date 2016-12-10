@@ -44,7 +44,7 @@ public class TrocoMBeam {
 		}
 	}
 	
-	private static Boolean CalcularTroco(float valorInserido, float preco)
+	private static Boolean CalcularTroco(double valorInserido, double preco)
 	{
 		float trocoTotal = 0;
 		for(int i = 0; i < 5; i++)
@@ -80,10 +80,11 @@ public class TrocoMBeam {
 	
 	private static void UpdateTrocoList(int[] resultArray) throws SQLException
 	{
-		for(int i = 0; i < 5; i++)
+		for(int i = 0, j = 4; i < tabela_troco.size(); i++, j--)
 		{
-			tabela_troco.get(i).SetQuantidade(tabela_troco.get(i).GetQuantidade() - resultArray[i]);
+			tabela_troco.get(i).SetQuantidade(tabela_troco.get(i).GetQuantidade() - resultArray[j]);
 		}
+		System.out.println();
 		MySQLAccess access = new MySQLAccess();
 		access.openConnection();
 		for(int i = 0; i < tabela_troco.size(); i++)
@@ -106,7 +107,7 @@ public class TrocoMBeam {
 		access.closeConnection();
 	}
 	
-	public static int[] VerificarTroco(float valorInserido, float preco) throws SQLException
+	public static int[] VerificarTroco(double valorInserido, double preco) throws SQLException
 	{
 		float trocoTotal = 0;
 		tabela_troco = getListTroco();

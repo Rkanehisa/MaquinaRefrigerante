@@ -113,7 +113,7 @@ public class LatasMBeam {
 		return -1;
 	}
 	
-	public static double sellLata(String bebida,double valorRecebido) throws SQLException{
+	public static int[] sellLata(String bebida,double valorRecebido) throws SQLException{
 		Date agora = new Date();
 		MySQLAccess access = new MySQLAccess();
 		access.openConnection();
@@ -134,19 +134,25 @@ public class LatasMBeam {
 				
 				rs = access.makeQuery(String.format("SELECT preco FROM bebidas WHERE indice=%d",indexBebida));
 				rs.next();
-				double troco = valorRecebido - rs.getDouble("preco");
+				int[] troco = TrocoMBeam.VerificarTroco(valorRecebido, rs.getDouble("preco"));
 				rs.close();
 				access.closeConnection();
-				return troco;
+				if (troco == null)
+				{
+					int returner[] = {-3};
+					return returner;
+				} else return troco;
 			}
 			else{
-				System.out.println(String.format("Não há latas de %s disponíveis para a venda",bebida));
-				return 0;
+				System.out.println(String.format("Nao ha latas de %s disponiveis para a venda",bebida));
+				int returner[] = {-2};
+				return returner;
 			}
 		}
 		else{
 			System.out.println(String.format("Valor insuficiente para a compra",bebida));
-			return 0;
+			int returner[] = {-1};
+			return returner;
 			
 		}
 		
