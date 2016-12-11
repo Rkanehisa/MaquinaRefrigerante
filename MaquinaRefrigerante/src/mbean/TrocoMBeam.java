@@ -55,9 +55,9 @@ public class TrocoMBeam {
 		{
 			trocoTotal += values[i] * trocoArray[i];
 		}
-		if (trocoTotal >= valorInserido)
+		if (trocoTotal >= (valorInserido - preco))
 		{
-			if (valorInserido > preco)
+			if (valorInserido >= preco)
 			{
 				valorInserido -= preco;
 				for(int i = 0; i < 5; i++)
