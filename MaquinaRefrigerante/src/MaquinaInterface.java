@@ -200,7 +200,8 @@ public class MaquinaInterface {
 						label_Bebida.setText("montar troco");
 					} else
 					{
-						label_Preco.setText("Troco: R$"+String.valueOf(troco));
+						double trocoVal = troco[4]*0.5 + troco[3]*1 + troco[2]*2 + troco[1]*5 + troco[0]*10 ;
+						label_Preco.setText("Troco: R$"+String.valueOf(trocoVal));
 						label_Bebida.setText("Vendido");
 					}
 
