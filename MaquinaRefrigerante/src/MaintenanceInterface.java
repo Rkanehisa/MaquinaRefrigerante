@@ -92,17 +92,16 @@ public class MaintenanceInterface extends JFrame {
 				try{
 					int quantidade= Integer.parseInt(textField_2.getText());
 					int lata = BebidasMBeam.getBebidaIndex(comboBox.getSelectedItem().toString());
-					Date dataReposicao = new Date();
-					int index = (LatasMBeam.getMaxIndex())+1;
-					for(int i = 0; i < quantidade; i++){
-						Latas l = new Latas(index,lata,false,dataReposicao);
-						LatasMBeam.addLatas(l);
-						index += 1;
+					
+					boolean success = LatasMBeam.inserirLatas(quantidade, lata);
+					if(success)
+					{
+						textField_2.setText("Inserted");
+					} else
+					{
+						textField_2.setText("ERROR");
 					}
-					
-					textField_2.setText("");
-					
-					
+									
 					
 				}
 				catch(NumberFormatException err){
@@ -144,9 +143,15 @@ public class MaintenanceInterface extends JFrame {
 					int quantidade = Integer.parseInt(textField_3.getText());
 					String valorStr = comboBox_1.getSelectedItem().toString();
 					double valor = Double.parseDouble(valorStr.substring(3));
-					TrocoMBeam.addTroco(quantidade, valor);
+					boolean success = TrocoMBeam.addTroco(quantidade, valor);
 					
-					textField_3.setText("");
+					if(success)
+					{
+						textField_3.setText("Inserted");
+					} else
+					{
+						textField_3.setText("ERROR");
+					}
 				}
 				catch(NumberFormatException err){
 					// Not an Integer
@@ -160,6 +165,17 @@ public class MaintenanceInterface extends JFrame {
 		contentPane.add(button_1);
 		
 		JButton button_2 = new JButton("Gerar Relat\u00F3rio");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try{
+			 			funcTools.createLog();
+			 			System.out.println("Relatório gerado");
+			 		}
+			 			catch (Exception err) {
+			 			// TODO: handle exception
+			 		}
+			 	}
+			 });
 		button_2.setBounds(10, 127, 284, 23);
 		contentPane.add(button_2);
 		
