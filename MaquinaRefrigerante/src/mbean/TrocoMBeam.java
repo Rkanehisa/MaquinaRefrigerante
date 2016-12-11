@@ -10,12 +10,13 @@ import dominio.Troco;
 
 public class TrocoMBeam {
 
-	private static List<Troco> tabela_troco = new LinkedList<Troco>();
+	static List<Troco> tabela_troco = new LinkedList<Troco>();
 	
 	private static int[] trocoArray = new int[5];
 	private static int[] resultArray = new int[5];
 	private static float[] values = {10.00f, 5.00f, 2.00f, 1.00f, 0.50f};
 
+	
 	public static List<Troco> getListTroco() throws SQLException {
 		if (!tabela_troco.isEmpty())
 		{
@@ -35,6 +36,12 @@ public class TrocoMBeam {
 
 		return tabela_troco;
 	}
+	
+	public static void clearTabelaTroco()
+	{
+		tabela_troco.clear();
+	}
+	
 	
 	private static void InitTrocoArray()
 	{
@@ -75,6 +82,7 @@ public class TrocoMBeam {
 				return true;
 			} else return false;
 		}
+
 		return false;
 	}
 	
@@ -84,7 +92,6 @@ public class TrocoMBeam {
 		{
 			tabela_troco.get(i).SetQuantidade(tabela_troco.get(i).GetQuantidade() - resultArray[j]);
 		}
-		System.out.println();
 		MySQLAccess access = new MySQLAccess();
 		access.openConnection();
 		for(int i = 0; i < tabela_troco.size(); i++)
@@ -97,7 +104,11 @@ public class TrocoMBeam {
 
 	}
 	
-	public static void addTroco(int quantidade,double valor) throws SQLException{
+	public static boolean addTroco(int quantidade,double valor) throws SQLException{
+		if(quantidade <= 0)
+		{
+			return false;
+		}
 		MySQLAccess access = new MySQLAccess();
 		access.openConnection();
 		ResultSet rs = access.makeQuery("SELECT quantidade FROM troco WHERE valor = " + String.valueOf(valor));
@@ -105,6 +116,7 @@ public class TrocoMBeam {
 		int q = quantidade + rs.getInt("quantidade");
 		access.UpdateDB(String.format("UPDATE troco SET quantidade = %d WHERE valor = ",q) + String.valueOf(valor));
 		access.closeConnection();
+		return true;
 	}
 	
 	public static int[] VerificarTroco(double valorInserido, double preco) throws SQLException

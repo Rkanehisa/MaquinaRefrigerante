@@ -18,6 +18,8 @@ public class LatasMBeam {
 	
 	private static List<Latas> latas = new LinkedList<Latas>();
 
+	
+	
 	public static List<Latas> getListLatas() throws SQLException {
 		if (!latas.isEmpty()) {
 			return latas;
@@ -38,6 +40,22 @@ public class LatasMBeam {
 		access.closeConnection();
 		rs.close();
 		return latas;
+	}
+	
+	public static boolean inserirLatas(int quantidade, int lata) throws SQLException
+	{
+		if(quantidade <= 0)
+		{
+			return false;
+		}
+		Date dataReposicao = new Date();
+		int index = (LatasMBeam.getMaxIndex())+1;
+		for(int i = 0; i < quantidade; i++){
+			Latas l = new Latas(index,lata,false,dataReposicao);
+			LatasMBeam.addLatas(l);
+			index += 1;
+		}
+		return true;
 	}
 	
 	private static boolean isRefrigerated(Date lata, long now)
@@ -144,13 +162,11 @@ public class LatasMBeam {
 				} else return troco;
 			}
 			else{
-				System.out.println(String.format("Nao ha latas de %s disponiveis para a venda",bebida));
 				int returner[] = {-2};
 				return returner;
 			}
 		}
 		else{
-			System.out.println(String.format("Valor insuficiente para a compra",bebida));
 			int returner[] = {-1};
 			return returner;
 			
