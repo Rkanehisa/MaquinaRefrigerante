@@ -188,15 +188,15 @@ public class MaquinaInterface {
 					{
 						label_Preco.setText("But I refuse");
 						label_Bebida.setText("Dinheiro Insuficiente");
-					} 
+					} else
 					if(troco[0] == -2)
 					{
 						label_Preco.setText("Dinheiro retornado");
 						label_Bebida.setText("Indisponivel");
-					}
+					}else
 					if(troco[0] == -3)
 					{
-						label_Preco.setText("Impossivel ");
+						label_Preco.setText("Impossivel");
 						label_Bebida.setText("montar troco");
 					} else
 					{
