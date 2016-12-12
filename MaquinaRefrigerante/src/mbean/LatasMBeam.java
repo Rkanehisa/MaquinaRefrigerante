@@ -144,7 +144,7 @@ public class LatasMBeam {
 				} else return troco;
 			}
 			else{
-				System.out.println(String.format("Nao ha latas de %s disponiveis para a venda",bebida));
+				System.out.println(String.format("Não há latas de %s disponíveis para a venda",bebida));
 				int returner[] = {-2};
 				return returner;
 			}

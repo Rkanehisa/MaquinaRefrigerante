@@ -99,7 +99,7 @@ public class MaintenanceInterface extends JFrame {
 						LatasMBeam.addLatas(l);
 						index += 1;
 					}
-					
+					System.out.println("Latas inserido");
 					textField_2.setText("");
 					
 					
@@ -145,7 +145,7 @@ public class MaintenanceInterface extends JFrame {
 					String valorStr = comboBox_1.getSelectedItem().toString();
 					double valor = Double.parseDouble(valorStr.substring(3));
 					TrocoMBeam.addTroco(quantidade, valor);
-					
+					System.out.println("Troco inserido");
 					textField_3.setText("");
 				}
 				catch(NumberFormatException err){
@@ -160,6 +160,17 @@ public class MaintenanceInterface extends JFrame {
 		contentPane.add(button_1);
 		
 		JButton button_2 = new JButton("Gerar Relat\u00F3rio");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try{
+					funcTools.createLog();
+					System.out.println("Relatório gerado");
+				}
+				catch (Exception err) {
+					// TODO: handle exception
+				}
+			}
+		});
 		button_2.setBounds(10, 127, 284, 23);
 		contentPane.add(button_2);
 		
